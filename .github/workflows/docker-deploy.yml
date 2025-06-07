@@ -38,4 +38,4 @@ jobs:
       uses: Azure/webapps-deploy@v3
       with:
         app-name: notes-api
-        images: ${{secrets.DOCKER_USERNAME}}/notes-api:latest
+        images: ${{secrets.DOCKERHUB_USERNAME}}/notes-api:latest
