@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs and runtime files
+*.log
+*.pid
+
+# Local environment variables
+.env
+.env.*
+
+# VS Code settings
+.vscode/
+
+# macOS
+.DS_Store
+
+# Docker artifacts
+*.tar
+docker-compose.override.yml
+
+# Jupyter notebooks (if used for testing)
+*.ipynb_checkpoints/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Pytest
+.cache/
+
+# MyPy
+.mypy_cache/
+
+# PyInstaller
+*.spec
