@@ -60,6 +60,10 @@ jobs:
         docker tag ${{secrets.DOCKERHUB_USERNAME}}/notes-api:latest gcr.io/${{secrets.GCP_PROJECT_ID}}/notes.api:latest
         docker push gcr.io/${{secrets.GCP_PROJECT_ID}}/notes.api:latest
 
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin --quiet
+
     - name: Configure kubectl
       run: |
         gcloud container clusters get-credentials scribbly-cluster --zone asia-south2-a --project ${{secrets.GCP_PROJECT_ID}}
