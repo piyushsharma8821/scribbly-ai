@@ -28,6 +28,7 @@ jobs:
         context: .
         push: true
         tags: ${{secrets.DOCKERHUB_USERNAME}}/notes-api:latest
+        load: true
 
     - name: Azure login
       uses: azure/login@v1
