@@ -39,3 +39,30 @@ jobs:
       with:
         app-name: notes-api
         images: ${{secrets.DOCKERHUB_USERNAME}}/notes-api:latest
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{secrets.GCP_SA_KEY}}
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{secrets.GCP_PROJECT_ID}}
+
+    - name: Authenticate Docker to GCR
+      run: |
+        gcloud auth configure-docker
+
+    - name: Tag and Push Image to GCR
+      run: |
+        docker tag ${{secrets.DOCKERHUB_USERNAME}}/notes-api:latest gcr.io/${{secrets.GCP_PROJECT_ID}}/notes.api:latest
+        docker push gcr.io/${{secrets.GCP_PROJECT_ID}}/notes.api:latest
+
+    - name: Configure kubectl
+      run: |
+        gcloud container clusters get-credentials scribbly-cluster --zone asia-south2-a --project ${{secrets.GCP_PROJECT_ID}}
+
+    - name: Deploy to GKE
+      run: |
+        kubectl apply -f k8s-deployment.yaml
